@@ -1,0 +1,9 @@
+﻿  Repository.cpp
+C:\Users\Ionut\source\repos\Project10\Project10\Repository.h(12,2): error C2143: syntax error: missing ';' before '<template-id>'
+C:\Users\Ionut\source\repos\Project10\Project10\Repository.h(22): message : see reference to class template instantiation 'Repository<T>' being compiled
+C:\Users\Ionut\source\repos\Project10\Project10\Repository.h(12,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  RepositoryFile.cpp
+C:\Users\Ionut\source\repos\Project10\Project10\Repository.h(12,2): error C2143: syntax error: missing ';' before '<template-id>'
+C:\Users\Ionut\source\repos\Project10\Project10\Repository.h(22): message : see reference to class template instantiation 'Repository<T>' being compiled
+C:\Users\Ionut\source\repos\Project10\Project10\Repository.h(12,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Generating Code...
