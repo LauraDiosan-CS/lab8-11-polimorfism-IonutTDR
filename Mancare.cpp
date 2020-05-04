@@ -1,70 +1,53 @@
 #include "Mancare.h"
-#include <iostream>
-#include <ostream>
-using namespace std;
-
-Mancare::Mancare()
-{
-	this->nume = NULL;
-	this->adresa = NULL;
-	pret = 0.0;
-	this->lista = "";
-}
-Mancare::Mancare(const char* nume, const char* adresa, string lista, float pret)
-{
-	this->nume = new char[strlen(nume) + 1];
-	strcpy_s(this->nume, strlen(nume) + 1, nume);
-
-	this->adresa = new char[strlen(adresa) + 1];
-	strcpy_s(this->adresa, strlen(adresa) + 1, adresa);
-
-	this->pret = pret;
-	this->lista = lista;
-}
-Mancare::~Mancare()
-{
-	delete[] this->nume;
-	delete[] this->adresa;
-	pret = 0.0;
-}
-Mancare::Mancare(const Mancare& m)
-{
-	this->nume = new char[strlen(m.nume) + 1];
-	strcpy_s(this->nume, strlen(m.nume) + 1, m.nume);
-
-	this->adresa = new char[strlen(m.adresa) + 1];
-	strcpy_s(this->adresa, strlen(m.adresa) + 1, m.adresa);
-
-	this->pret = m.pret;
-	this->lista = m.lista;
-}
-string Mancare::getListaPreparate()
-{
-	return this->lista;
+Mancare::Mancare() : Comanda() {}
+Mancare::~Mancare() {}
+Mancare::Mancare(const string nume, const string adresa, const string lista, const float pret) {
+		this->numeClient = nume;
+		this->adresaClient = adresa;
+		this->pretTotal = pret;
+		this->listaPreparate = lista;
+	}
+Mancare::Mancare(const Mancare& m) {
+	this->numeClient = m.numeClient;
+	this->adresaClient = m.adresaClient;
+	this->listaPreparate = m.listaPreparate;
+	this->pretTotal = m.pretTotal;
 }
 
-Mancare& Mancare::operator=(const Mancare& m)
-{
-	// TODO: insert return statement here
-	this->nume = new char[strlen(m.nume) + 1];
-	strcpy_s(this->nume, strlen(m.nume) + 1, m.nume);
+Mancare::Mancare(string line, char delim) {
+	vector<string> elems = splitLine(line, delim);
+	this->numeClient = elems[1];
+	this->adresaClient = elems[2];
+	this->listaPreparate = elems[3];
+	this->pretTotal = strtof((elems[4]).c_str(), 0);
+}
+string Mancare::getNume() {
+	return this->numeClient;
+}
+string Mancare::getAdresa() {
+	return this->adresaClient;
+}
 
-	this->adresa = new char[strlen(m.adresa) + 1];
-	strcpy_s(this->adresa, strlen(m.adresa) + 1, m.adresa);
+float Mancare::getPret() {
+	return this->pretTotal;
+}
+string Mancare::getLista() {
+	return this->listaPreparate;
+}
 
-	this->pret = m.pret;
-	this->lista = m.lista;
+Mancare& Mancare::operator=(const Mancare& m) {
+	this->numeClient = m.numeClient;
+	this->adresaClient = m.adresaClient;
+	this->listaPreparate = m.listaPreparate;
+	this->pretTotal = m.pretTotal;
 	return*this;
 }
 
+bool Mancare::operator ==(const Mancare& s) {
+	return this->numeClient.compare(s.numeClient) == 0 && this->adresaClient.compare(s.adresaClient) == 0 && this->listaPreparate.compare(s.listaPreparate) == 0 && this->pretTotal == s.pretTotal;
+}
 
-ostream& operator<<(ostream& os, const Mancare& m)
-{
-	os << m.nume << " " << m.adresa << " [ ";
-	for (int i = 0; i < m.lista.length(); i++)
-	{
-		os << m.lista[i] << " ";
-	}
-	os << "] " << m.pret << "\n";
+ostream& operator<<(ostream& os, const Mancare& m) {
+	os << m.numeClient << "," << m.adresaClient << "," << m.listaPreparate << "," << m.pretTotal;
 	return os;
 }

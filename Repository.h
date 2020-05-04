@@ -1,23 +1,22 @@
-#ifndef REPOSITORYSTL_H
-#define REPOSITORYSTL_H
-#include "Comanda.h"
-#include<iterator>
+#ifndef REPOSITORY_H
+#define REPOSITORY_H
 #include <map>
-#include <iostream>
-#include <ostream>
 using namespace std;
+
 template <class T>
 class Repository {
-protected:A
-	map<int, T> elem;
+protected:
+	map<int, T> elems;
 	int size;
+
 public:
 	Repository();
-	~Repository();
-	void addElem(const T el);
-	void removeElem(int poz);
-	void updateElem(int poz, const T newElem);
-	int getSize();
+	void add(const T& t);
+	void remove(int poz);
+	void update(int poz, T& newT);
 	map<int, T> getAll();
+	int getSize();
+	~Repository();
+
 };
-#endif // !REPOSITORY_H
+#endif

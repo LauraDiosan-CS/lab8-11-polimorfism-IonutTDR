@@ -1,45 +1,28 @@
 #include "Repository.h"
 
+template <class T> Repository<T>::Repository() { this->size = 0; }
+template <class T> Repository<T>::~Repository() { this->size = 0; }
 
-template <class T> Repository<T>::Repository()
+template <class T> void Repository<T>::add(const T& t)
 {
-	this->elem.clear();
-	this->size = 0;
+	this->elems.insert(pair<int, T>(this->size++, t));
 }
 
-template<class T> void Repository<T>::addElem(const T el)
+template <class T> void Repository<T>::remove(int poz)
 {
-	this->elem.insert(pair<int, T>(this->size++, el));
+	this->elems.erase(poz);
 }
 
-template<class T> void Repository<T>::removeElem(int poz)
+template <class T> void Repository<T>::update(int t, T& newT)
 {
-	typename map<int, T>::iterator itr;
-	itr = this->elem.find(poz);
-	if (itr != this->elem.end())
-		this->elem.erase(itr);
+	this->elems[t] = newT;
 }
 
-template<class T> void Repository<T>::updateElem(int poz, const T newElem)
+template <class T> map<int, T> Repository<T>::getAll()
 {
-	this->elem[poz] = newElem;
+	return this->elems;
 }
 
-template<class T>map<int, T> Repository<T>::getAll()
-{
-	return this->elem;
+template <class T> int Repository<T>::getSize() {
+	return this->elems.size();
 }
-
-template<class T> Repository<T>::~Repository()
-{
-	this->elem.clear();
-	this->size = 0;
-}
-
-template<class T> int Repository<T>::getSize()
-{
-	return this->elem.size();
-}
-
-
-

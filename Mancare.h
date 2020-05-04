@@ -1,22 +1,28 @@
-#pragma once
+#ifndef MANCARE_H
+#define MANCARE_H
 #include "Comanda.h"
-#include <cstring>
-#include <string>
-#include <iostream>
-using namespace std;
 
-class Mancare: public Comanda{
 
+class Mancare : public Comanda {
 private:
-	string lista;
-
+	string listaPreparate;
 public:
 	Mancare();
-	Mancare(const char* nume, const char* adresa, string lista, float pret);
 	~Mancare();
+	Mancare(const string nume, const string adresa, const string lista, const float pret);
 	Mancare(const Mancare& m);
-	string getListaPreparate();
+	Mancare(string line, char delim);
+	string getNume();
+	string getAdresa();
+	float getPret();
+	string getLista();
+
 	Mancare& operator=(const Mancare& m);
+
+	bool operator ==(const Mancare& s);
+
 	friend ostream& operator<<(ostream& os, const Mancare& m);
 
 };
+
+#endif // !MANCARE_H
